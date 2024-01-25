@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            
+            <div class="card card-dark bg-dark text-white ">
+                <img class="mb-3 card-img-top" [src]="recipe?.imgUrl" alt="Card image cap"
+                    style="width: 100%; height: 19rem; object-fit: cover;">
+                <div class="card-body">
+                    <header class="card-title">
+                        <h3 class="card-title">{{ recipe?.name }}</h3>
+                    </header>
+                
+                    <div class="card-text"> {{ recipe?.description}} </div>
+                    <div class="dropdown mt-4">
+                        <button class="btn btn-primary dropdown-toggle" aria-expanded="true" role="button" data-bs-toggle="dropdown">Manage Recipe<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark bg-secondary">
+                            <li class="dropdown-item"><a style="cursor: pointer;">Add Ingredients to Shopping</a></li>
+                            <li class="dropdown-item"><a style="cursor: pointer;">Edit</a></li>
+                            <li class="dropdown-item"><a style="cursor: pointer;" (click)="deleteRecipe()" >Delete</a></li>
+                        </ul>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

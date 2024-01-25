@@ -1,0 +1,89 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card text-white px-3 py-3 bg-dark">
+            <header>
+                <h3>Add New Recipe</h3>
+            </header>
+            <form [formGroup]="newRecipeForm" (ngSubmit)="onFormSubmit(recipeName, recipeDesc, recipeUrl)" >
+                <div class="form-group">
+                    <input #recipeName class="form-control mt-3" placeholder="Name of recipe" name="recipeName"  type="text" id="recipeName" formControlName="recipeName" 
+                    [ngClass]="!newRecipeForm?.get('recipeName')?.valid && newRecipeForm?.get('recipeName')?.untouched && isSubmitted ? 'invalid' : null" 
+                    >
+                    <span *ngIf="!newRecipeForm?.get('recipeName')?.valid && newRecipeForm?.get('recipeName')?.touched" class="form-control alert alert-danger">Recipe Name is required</span>
+                    <span *ngIf="!newRecipeForm?.get('recipeName')?.valid && newRecipeForm?.get('recipeName')?.untouched && isSubmitted" class="form-control alert alert-danger">Recipe Name is required</span>
+                </div>
+                <div class="form-group">
+                    <textarea  #recipeDesc rows="3" class="form-control mt-3" placeholder="Description of recipe" name="recipeDesc" type="text" formControlName="recipeDesc"
+                    [ngClass]="!newRecipeForm?.get('recipeDesc')?.valid && newRecipeForm?.get('recipeDesc')?.untouched && isSubmitted ? 'invalid' : null" 
+                    ></textarea>
+                    <span *ngIf="!newRecipeForm?.get('recipeDesc')?.valid && newRecipeForm?.get('recipeDesc')?.touched" class="form-control alert alert-danger">Description is required</span>
+                    <span *ngIf="!newRecipeForm?.get('recipeDesc')?.valid && newRecipeForm?.get('recipeDesc')?.untouched && isSubmitted" class="form-control alert alert-danger">Description is required</span>
+                </div>
+                <div class="form-group">
+                    <input  #recipeUrl class="form-control mt-3" placeholder="Image url" type="text" name="recipeImgUrl" formControlName="recipeImgUrl"
+                    [ngClass]="!newRecipeForm?.get('recipeImgUrl')?.valid && newRecipeForm?.get('recipeImgUrl')?.untouched && isSubmitted ? 'invalid' : null" 
+                    >
+                    <span *ngIf="!newRecipeForm?.get('recipeImgUrl')?.valid && newRecipeForm?.get('recipeImgUrl')?.touched" class="form-control alert alert-danger">Image Url is required</span>
+                    <span *ngIf="!newRecipeForm?.get('recipeImgUrl')?.valid && newRecipeForm?.get('recipeImgUrl')?.untouched && isSubmitted" class="form-control alert alert-danger">Image Url is required</span>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <h5>Ingredients</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input #ingName class="form-control mt-3" placeholder="Name of Ingredient" name="ingredientName" type="text"  formControlName="ingredientName"
+                                [ngClass]="!newRecipeForm?.get('ingredientName')?.valid && newRecipeForm?.get('ingredientName')?.untouched && isSubmitted ? 'invalid' : null" 
+                                >
+                                <span *ngIf="!newRecipeForm?.get('ingredientName')?.valid && newRecipeForm?.get('ingredientName')?.touched" class="form-control alert alert-danger">Ingredient name is required</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input #ingAmount class="form-control mt-3" placeholder="Amount of Ingredient" name="ingredientAmount" type="text"  formControlName="ingredientAmount"
+                                [ngClass]="!newRecipeForm?.get('ingredientAmount')?.valid && newRecipeForm?.get('ingredientAmount')?.untouched && isSubmitted ? 'invalid' : null" 
+                                >
+                                <span *ngIf="!newRecipeForm?.get('ingredientAmount')?.valid && newRecipeForm?.get('ingredientAmount')?.touched" class="form-control alert alert-danger">Amount is required</span>
+                            </div>
+                        </div>
+        
+                        <div class="form-group mt-4 mb-4">
+                            <span class="form-control alert alert-danger" *ngIf="isFieldsinValid && (ingName.value == '' || ingAmount.value == '') ">
+                                <span>*Fill in all fields</span><br>
+                            </span>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <button class="btn btn-warning" type="button" (click)="addIngredient(ingName, ingAmount)">Add Ingredient</button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <button class="btn btn-success" *ngIf="showSaved">Saved</button>
+                                </div>
+                            </div>                         
+                        </div>
+                        <hr>
+                        <div class="form-group mt-4">
+                            <span class="form-control alert alert-danger" *ngIf="isSubmitted && !newRecipeForm.valid">
+                                <span>*Fill in all fields</span><br>
+                                <span *ngIf="ingredients.length < 1">*Add at least 1(One) ingredient</span>
+                            </span>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <button class="btn btn-primary" type="submit">Add Recipe</button>
+                                </div>
+                                <div class="col-sm-4">
+                                    <button class="btn btn-success" *ngIf="isSuccessSubmit">Recipe Added</button>
+                                </div>
+                                <div class="col-sm-4">
+                                    <button class="btn btn-danger" type="button" (click)="closeForm()">Close</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>               
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
